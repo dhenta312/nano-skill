@@ -75,6 +75,21 @@ baca `state.md` dulu sebelum menjawab.
 | Pengembangan Sistem | dev-workflow · figma:figma-generate-design · figma:figma-design-to-code · figma:figma-generate-library |
 | Dokumentasi | generating-test-reports · screenshotting-web-app · editing-powerpoint-with-python |
 
+## Knowledge bawaan (self-contained)
+
+nano membawa knowledge desain & konvensi pengembangan **terbundel** di repo ini,
+bukan bergantung pada skill/memory mesin tertentu:
+
+- **`references/pilar-design-tokens.md`** — nilai token PILAR Design System UII
+  (palet teks, tipografi, fokus) + daftar yang masih hilang. Baca ini sebelum menyusun
+  desain/koding UI dengan PILAR.
+- **`skills/dev-workflow/SKILL.md`** — konvensi pengembangan UII (stack Laravel+Angular,
+  token Tailwind PILAR, commit, stepper, jebakan). Bisa dibaca langsung sebagai referensi,
+  atau diaktifkan sebagai skill standalone (lihat README).
+
+Saat mengerjakan **Pengembangan Sistem**, baca kedua file di atas **sebelum** memakai
+`dev-workflow`/`figma:*` agar desain & kode konsisten dengan PILAR.
+
 ## Kontrol kualitas (4 kendali)
 
 1. **Konfirmasi manusia** — tidak ada dokumen final tanpa persetujuan penanggung jawab.
