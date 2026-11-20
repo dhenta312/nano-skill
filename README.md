@@ -1,8 +1,9 @@
-# nano — AI Asisten Manajemen Proyek (Ide → Dokumentasi)
+# nano — AI Asisten Manajemen Proyek (Ide → Sistem → Dokumentasi)
 
 Skill [Claude Code](https://claude.com/claude-code) untuk menjalankan siklus pengembangan
 sistem secara utuh: **Diskusi & Analisis** (PRD/FSD/BPMN) → **Pengembangan Sistem**
-(Figma PILAR + prototype Angular+Laravel) → **Dokumentasi** (test report + user manual).
+(Figma PILAR + prototype Full Angular+Laravel atau Lite Vite) → **Dokumentasi**
+(test report + user manual, dengan pilihan format Word/Excel/PowerPoint/PDF).
 
 Repo ini **self-contained**: cukup clone, semua knowledge (termasuk PILAR design system
 UII) sudah terbundel.
@@ -43,13 +44,22 @@ symlink ke lokasi skill:
 ln -s ~/.claude/skills/nano/skills/dev-workflow ~/.claude/skills/dev-workflow
 ```
 
-## Ketergantungan eksternal (belum terbundel)
+## Ketergantungan eksternal
 
-- **File sumber library PILAR** — nilai brand, spacing, shadow, radius belum tersedia;
-  lihat `references/pilar-design-tokens.md` untuk detail & stopgap.
+- **Token PILAR** — sudah terbundel di `references/pilar-design-tokens.md` (palet teks,
+  brand, semantik, spacing, radius, shadow). Bila ada token baru di file Figma PILAR,
+  perbarui file tersebut.
 - **Skill lain** yang dipanggil nano (instal terpisah bila perlu):
   `superpowers:*`, `ai-native-development-workflow`, `figma:*`, `generating-test-reports`,
   `screenshotting-web-app`, `editing-powerpoint-with-python`.
+- **Document Skills (Anthropic)** — untuk output Word/Excel/PowerPoint/PDF di fase
+  Dokumentasi:
+  ```bash
+  /plugin marketplace add anthropics/skills
+  /plugin install document-skills@anthropic-agent-skills
+  ```
+  Dependensi Python: `python-docx` `openpyxl` `python-pptx` `pypdf` `pdfplumber`
+  `reportlab` `pdf2image`.
 
 ## Update nano
 

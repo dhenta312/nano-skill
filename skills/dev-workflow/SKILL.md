@@ -21,6 +21,19 @@ Laravel + Angular.
 > token PILAR, workflow, dan jebakan tetap berlaku; sesuaikan perintah server
 > per stack-nya.
 
+## Laravel Boost (backend — direkomendasikan)
+
+Untuk proyek Laravel, pasang **Laravel Boost** agar kode backend mengikuti best
+practice dan nano punya grounding (anti-halu) soal API Laravel:
+
+```bash
+cd backend && composer require laravel/boost --dev && php artisan boost:install
+```
+
+`boost:install` otomatis mendeteksi Claude Code, menulis `AGENTS.md`/`CLAUDE.md`
+(guidelines), skill di `.claude/skills/`, dan MCP `laravel-boost`. Bila MCP tidak
+terdaftar otomatis: `claude mcp add -s local -t stdio laravel-boost php artisan boost:mcp`.
+
 ## 1. Menjalankan dev server (Laravel + Angular)
 
 ```bash
@@ -99,6 +112,28 @@ Teks label + tanda `*` dibungkus **satu** `<span>`:
 
 `<label>` memakai `flex flex-col`, sehingga tiap anak langsung jadi item flex
 tersendiri. Tanpa pembungkus, tanda `*` turun ke baris sendiri.
+
+### Code → Figma (code-to-design)
+
+Saat men-generate desain Figma dari app yang sudah berjalan (bukan menggambar dari nol):
+
+- Cari port app yang benar (`lsof -iTCP:<port>`); cek `frontend/src/app/api-url.ts` cocok dengan port backend — jangan asumsi 4200/8000.
+- Ambil data asli dari API/DB, jangan mengarang angka/nama/status.
+- Pakai komponen PILAR (`importComponentSetByKeyAsync` + `setProperties`); ikon/logo SVG eksak via `upload_assets`.
+- Bind warna ke variabel lokal file (`mapped`/`brand`), font **Inter**.
+
+Jebakan `use_figma` yang sering muncul:
+
+| Jebakan | Solusi |
+|---|---|
+| `resize(w,1)` mengunci tinggi 1px (konten "kosong") | `primaryAxisSizingMode`/`counterAxisSizingMode = 'AUTO'` (hug) |
+| `layoutSizingHorizontal='FILL'` sebelum jadi child auto-layout | set setelah `appendChild` |
+| `createNodeFromSvg`/`createAutoLayout` default **fill putih** | set `fills=[]` eksplisit pada wrapper/ikon; jangan "clear+restore" blanket |
+| SVG ber-`<clipPath>` / tanpa `fill="none"` di root | artefak **fill hitam** |
+| Gradient stop | wajib `a:1` |
+| `counterAxisAlignItems` pada layout horizontal | `MIN`/`MAX`/`CENTER` (bukan `START`/`END`) |
+| `layoutPositioning='ABSOLUTE'` | set setelah `appendChild` |
+| Ubah teks | `loadFontAsync` dulu |
 
 ## 5. Form bertahap (stepper)
 
