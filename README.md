@@ -28,8 +28,16 @@ git clone https://github.com/dhenta312/nano-skill.git ~/.claude/skills/nano
 nano/
 ├── SKILL.md                              # skill utama nano
 ├── README.md                             # file ini
+├── scripts/
+│   └── attachment-to-text.sh             # konversi lampiran non-teks → teks (gateway text-only)
 ├── references/
-│   └── pilar-design-tokens.md            # token PILAR Design System UII
+│   ├── pilar-design-tokens.md            # token PILAR Design System UII
+│   ├── user-manual-guidance.md           # panduan resmi User Manual Guidance BSI UII
+│   └── user-manual-example/              # contoh kerja: generator docx + render PDF + hasil
+├── templates/
+│   ├── user-manual-template.docx         # template .docx resmi user manual BSI UII
+│   ├── cover-logo.png                    # logo UII untuk cover manual
+│   └── cover-bg.png                      # grafik latar dekoratif cover manual
 └── skills/
     └── dev-workflow/
         └── SKILL.md                      # konvensi dev UII (Laravel + Angular + PILAR)
@@ -49,6 +57,11 @@ ln -s ~/.claude/skills/nano/skills/dev-workflow ~/.claude/skills/dev-workflow
 - **Token PILAR** — sudah terbundel di `references/pilar-design-tokens.md` (palet teks,
   brand, semantik, spacing, radius, shadow). Bila ada token baru di file Figma PILAR,
   perbarui file tersebut.
+- **Konversi lampiran (gateway text-only)** — bila Claude Code berjalan di belakang gateway
+  LiteLLM yang hanya melayani model text-only, lampiran gambar/PDF/berkas binary menyebabkan
+  API 400. nano mengatasinya dengan mengonversi lampiran lokal via `scripts/attachment-to-text.sh`.
+  Butuh (macOS): `brew install poppler tesseract` (OCR bahasa Indonesia + Inggris sudah
+  tercakup di data `tessdata`); `textutil` dan `sips` sudah bawaan macOS.
 - **Skill lain** yang dipanggil nano (instal terpisah bila perlu):
   `superpowers:*`, `ai-native-development-workflow`, `figma:*`, `generating-test-reports`,
   `screenshotting-web-app`, `editing-powerpoint-with-python`.
